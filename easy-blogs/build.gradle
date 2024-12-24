@@ -1,0 +1,50 @@
+// build.gradle
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.1'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.project'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs 'library'
+        }
+    }
+}
+
+subprojects {
+    apply from: rootProject.file('dependencies.gradle')
+    tasks.withType(BootJar).tap {
+        configureEach {
+            enabled = false
+        }
+    }
+}
+
+apply from: rootProject.file('dependencies.gradle')
+
+dependencies {
+    implementation project(path: 'library:core')
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
