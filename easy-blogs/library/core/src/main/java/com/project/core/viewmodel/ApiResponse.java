@@ -1,4 +1,4 @@
-package viewmodel;
+package com.project.core.viewmodel;
 
 import lombok.*;
 

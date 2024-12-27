@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.project.core", "com.project.easyblogs"})
 @EnableJpaAuditing
 @EnableTransactionManagement(proxyTargetClass=true)
-@ComponentScan(basePackages = {"com.project.core", "com.project.easyblogs"})
 public class EasyBlogsApplication {
 
     public static void main(String[] args) {
