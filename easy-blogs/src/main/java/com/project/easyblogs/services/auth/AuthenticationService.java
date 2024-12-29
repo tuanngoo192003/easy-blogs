@@ -2,6 +2,7 @@ package com.project.easyblogs.services.auth;
 
 import com.project.core.entities.BaseRepository;
 import com.project.core.entities.BaseService;
+import com.project.easyblogs.dtos.AuthenticationDTO;
 import com.project.easyblogs.entities.auth.Authentication;
 import com.project.easyblogs.repositories.auth.AuthenticationRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class AuthenticationService extends BaseService<Authentication, String> {
         this.repository = (AuthenticationRepository) repository;
     }
 
-    public Authentication findByUsernameAndUserCase(String name, String username) {
+    public AuthenticationDTO findByUsernameAndUserCase(String name, String username) {
         return repository.findByUsernameAndUserCase(name, username);
     }
 }

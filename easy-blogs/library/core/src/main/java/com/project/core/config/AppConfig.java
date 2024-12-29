@@ -19,7 +19,6 @@ import java.util.concurrent.ScheduledExecutorService;
 public class AppConfig implements CommandLineRunner {
     @Value("${server.time-zone}")
     private String timeZone;
-    private final SocketIOServer server;
 
     @PostConstruct
     public void init() {
@@ -29,12 +28,12 @@ public class AppConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        try {
-            server.start();
-        } catch (Exception e) {
-            log.error("--> Error starting socket server: {}", e.getMessage());
-            System.exit(0);
-        }
+//        try {
+//            server.start();
+//        } catch (Exception e) {
+//            log.error("--> Error starting socket server: {}", e.getMessage());
+//            System.exit(0);
+//        }
     }
 
     @Bean

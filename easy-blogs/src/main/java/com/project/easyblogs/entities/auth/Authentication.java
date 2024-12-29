@@ -8,9 +8,8 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
-import java.util.List;
 
-@Table(name = "user_cases", schema = "auth")
+@Table(name = "authentication", schema = "auth")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -26,7 +25,4 @@ public class Authentication extends BaseEntity implements Serializable {
     private String accountId;
 
     private String userCaseId;
-
-    @Convert(converter = StringListHelper.class)
-    private List<String> roles;
 }

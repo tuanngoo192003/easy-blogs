@@ -1,8 +1,6 @@
 spring:
   application:
     name: EASY-BLOGS
-  profiles:
-    active: dev
   datasource:
     url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
     driver-class-name: org.postgresql.Driver
@@ -20,9 +18,24 @@ spring:
       jdbc:
         time_zone: ${DB_TIME_ZONE:Asia/Ho_Chi_Minh}
 
+  thymeleaf:
+    check-template-location: false
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 100MB
+  threads:
+    virtual:
+      enabled: true
+
 jwt:
   access-token:
     expiration: ${JWT_ACCESS_EXPIRATION:60}
   secret-key: ${JWT_SECRET:token-secret-key}
   refresh-token:
     expiration: ${JWT_REFRESH_EXPIRATION:10080}
+
+server:
+  time-zone: ${SERVER_TIME_ZONE:Asia/Ho_Chi_Minh}
+  port: ${SERVER_PORT:8080}
+  address: ${SERVER_ADDRESS:localhost}

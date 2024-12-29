@@ -24,6 +24,6 @@ public class Token extends BaseEntity implements Serializable {
     private String id;
 
     private String username;
-    private String refreshToken;
+    private String token;
     private LocalDateTime expiredAt;
 }

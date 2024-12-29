@@ -2,6 +2,8 @@ package com.project.easyblogs.config;
 
 import com.project.core.config.security.JwtProvider;
 import com.project.core.enums.SystemUserCases;
+import com.project.core.helper.StringListHelper;
+import com.project.easyblogs.dtos.AuthenticationDTO;
 import com.project.easyblogs.services.auth.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,12 +24,15 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
     private final JwtProvider jwtProvider;
     private final AuthenticationService authenticationService;
+    private final StringListHelper stringListHelper;
 
 
     public AuthenticationInterceptor(JwtProvider jwtProvider,
-                                     AuthenticationService authenticationService) {
+                                     AuthenticationService authenticationService,
+                                     StringListHelper stringListHelper) {
         this.jwtProvider = jwtProvider;
         this.authenticationService = authenticationService;
+        this.stringListHelper = stringListHelper;
     }
 
     @Override
@@ -74,13 +79,13 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             return true;
         }
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        com.project.easyblogs.entities.auth.Authentication authen = authenticationService.findByUsernameAndUserCase(authentication.value().name(),
+        AuthenticationDTO authen = authenticationService.findByUsernameAndUserCase(authentication.value().name(),
                 userDetails.getUsername());
 
         if(Objects.isNull(authen)) {
             return false;
         }
-        List<String> roles = authen.getRoles();
+        List<String> roles = stringListHelper.convertToEntityAttribute(authen.getRoles());
 
         return roles.stream().anyMatch(role -> userDetails.getAuthorities().stream().anyMatch(
                 grantedAuthority -> Objects.equals(grantedAuthority.getAuthority(), role)));

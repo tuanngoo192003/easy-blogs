@@ -2,13 +2,15 @@ package com.project.easyblogs.entities.auth;
 
 import com.project.core.entities.BaseEntity;
 import com.project.core.entities.NanoIdsGenerator;
+import com.project.core.helper.StringListHelper;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
+import java.util.List;
 
-@Table(name = "user_cases", schema = "auth")
+@Table(name = "usercases", schema = "auth")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -25,4 +27,7 @@ public class UserCase extends BaseEntity implements Serializable {
     private String name;
 
     private String description;
+
+    @Convert(converter = StringListHelper.class)
+    private List<String> roles;
 }

@@ -7,5 +7,7 @@ public class Entity {
         public Field(){}
 
         public static String USERNAME = "username";
+        public static String EMAIL = "email";
+        public static String TOKEN = "token";
     }
 }

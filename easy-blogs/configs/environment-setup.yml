@@ -1,0 +1,16 @@
+name: easy-blogs-env
+services:
+  postgres:
+    image: postgres
+    container_name: easy-blogs-postgres
+    restart: always
+    ports:
+      - '5433:5432' #<host_port>:<container:port>
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+volumes:
+  local_pgdata: # Declare the named volume here
+#docker-compose -f environment-setup.yml up
